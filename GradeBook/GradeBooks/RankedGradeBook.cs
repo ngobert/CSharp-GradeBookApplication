@@ -26,18 +26,18 @@ namespace GradeBook.GradeBooks
             int gradeSize = Convert.ToInt32(Students.Count() * 0.20);
 
             var foundPosition = false;
-            int gradeStart = 0;
-            int gradeEnd = gradeStart + gradeSize;
-            int gradeRankCounter = 0;
+            int gradeEnd = gradeSize;
             int studentGradeRank = 0;
 
-            while(!foundPosition && gradeRankCounter < 4) {
-                if (averageGrade >= sortedGrades[gradeEnd]) {
-                    studentGradeRank = gradeRankCounter;
+            for (int i = 0; i < 4; i++)
+            {
+                int lowGradeIndex = gradeEnd - 1;
+                if (averageGrade >= sortedGrades[lowGradeIndex]) {
+                    studentGradeRank = i;
                     foundPosition = true;
+                    break;
                 }
-                gradeStart += gradeSize;
-                gradeRankCounter += 1;
+                gradeEnd += gradeSize;
             }
 
             if(foundPosition) {
@@ -50,8 +50,6 @@ namespace GradeBook.GradeBooks
                         return 'C';
                     case 3:
                         return 'D';
-                    default:
-                        return 'F';
                 }
             }
 
